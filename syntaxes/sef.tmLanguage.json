@@ -1,0 +1,92 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "SAMMI Extension",
+	"scopeName": "source.sef",
+	"patterns": [
+		{
+			"include": "#external"
+		},
+		{
+			"include": "#command"
+		},
+		{
+			"include": "#hook"
+		},
+		{
+			"include": "#script"
+		},
+		{
+			"include": "#keywords"
+		}
+	],
+	"repository": {
+		"external": {
+			"name": "section.block.sef",
+			"begin": "\\[insert_external]",
+			"end": "\\[",
+			"captures": {
+				"0": {
+					"name": "keyword.control.sef"
+				}
+			},
+			"patterns": [
+				{
+					"include": "text.html.basic"
+				}
+			]
+		},
+		"command": {
+			"name": "section.block.sef",
+			"begin": "\\insert_command]",
+			"end": "\\[",
+			"captures": {
+				"0": {
+					"name": "keyword.control.sef"
+				}
+			},
+			"patterns": [
+				{
+					"include": "source.js"
+				}
+			]
+		},
+		"hook": {
+			"name": "section.block.sef",
+			"begin": "\\insert_hook]",
+			"end": "\\[",
+			"captures": {
+				"0": {
+					"name": "keyword.control.sef"
+				}
+			},
+			"patterns": [
+				{
+					"include": "source.js"
+				}
+			]
+		},
+		"script": {
+			"name": "section.block.sef",
+			"begin": "\\insert_script]",
+			"end": "\\[insert_over]",
+			"captures": {
+				"0": {
+					"name": "keyword.control.sef"
+				}
+			},
+			"patterns": [
+				{
+					"include": "source.js"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.sef",
+					"match": "\\[(extension|insert)_(.+?)\\]"
+				}
+			]
+		}
+	}
+}

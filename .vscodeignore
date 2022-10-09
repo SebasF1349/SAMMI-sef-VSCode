@@ -1,0 +1,17 @@
+.vscode
+**/*.ts
+**/*.map
+node_modules/**
+**/node_modules
+client/src/**
+server/src/**
+**/tsconfig.json
+tsconfig.json
+tsconfig.base.json
+**/webpack.config.js
+shared.webpack.config.js
+.gitignore
+.eslintignore
+.eslintrc.js
+/versions
+TODO.md
