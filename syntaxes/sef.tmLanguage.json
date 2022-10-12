@@ -4,26 +4,20 @@
 	"scopeName": "source.sef",
 	"patterns": [
 		{
-			"include": "#external"
+			"include": "#html"
 		},
 		{
-			"include": "#command"
-		},
-		{
-			"include": "#hook"
-		},
-		{
-			"include": "#script"
+			"include": "#js"
 		},
 		{
 			"include": "#keywords"
 		}
 	],
 	"repository": {
-		"external": {
-			"name": "section.block.sef",
+		"html": {
+			"name": "html.block.sef",
 			"begin": "\\[insert_external]",
-			"end": "\\[",
+			"end": "\\[insert_command",
 			"captures": {
 				"0": {
 					"name": "keyword.control.sef"
@@ -35,10 +29,10 @@
 				}
 			]
 		},
-		"command": {
-			"name": "section.block.sef",
-			"begin": "\\insert_command]",
-			"end": "\\[",
+		"js": {
+			"name": "js.block.sef",
+			"begin": "\\]",
+			"end": "\\[insert_over\\]",
 			"captures": {
 				"0": {
 					"name": "keyword.control.sef"
@@ -46,36 +40,11 @@
 			},
 			"patterns": [
 				{
-					"include": "source.js"
-				}
-			]
-		},
-		"hook": {
-			"name": "section.block.sef",
-			"begin": "\\insert_hook]",
-			"end": "\\[",
-			"captures": {
-				"0": {
+					"match": "\\[(insert_hook|insert_script)\\]",
 					"name": "keyword.control.sef"
-				}
-			},
-			"patterns": [
+				},
 				{
-					"include": "source.js"
-				}
-			]
-		},
-		"script": {
-			"name": "section.block.sef",
-			"begin": "\\insert_script]",
-			"end": "\\[insert_over]",
-			"captures": {
-				"0": {
-					"name": "keyword.control.sef"
-				}
-			},
-			"patterns": [
-				{
+					"match": "^(?!insert_).*$",
 					"include": "source.js"
 				}
 			]
