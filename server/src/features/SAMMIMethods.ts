@@ -40,7 +40,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		detail: "SAMMI.insertArray(arrayName, index, value, buttonId = 'global')",
 		documentation: {
 			kind: MarkupKind.Markdown,
-			value: "Inserts an item to a specified index in an array, shifting the other items\n\r*@arg* `arrayName` - name of the array\n\r*@arg* `index` - index to insert the new item at\n\r*@arg* `value` - item value\n\r*@arg* `buttonId` - button id to save the arrray, global variable by default.",
+			value: "Inserts an item to a specified index in an array, shifting the other items\n\r*@arg* `arrayName` - name of the array\n\r*@arg* `index` - index to insert the new item at\n\r*@arg* `value` - item value\n\r*@arg* `buttonId` - button id to save the array, global variable by default.",
 		},
 	},
 	{
@@ -50,7 +50,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		detail: "SAMMI.deleteArray(arrayName, slot, buttonId = 'global')",
 		documentation: {
 			kind: MarkupKind.Markdown,
-			value: "Deletes an item in a specified index in an array, shifting the other items\n\r*@arg* `arrayName` - name of the array\n\r*@arg* `index` - index to insert the new item at\n\r*@arg* `buttonId` - button id to save the arrray, global variable by default.",
+			value: "Deletes an item in a specified index in an array, shifting the other items\n\r*@arg* `arrayName` - name of the array\n\r*@arg* `index` - index to insert the new item at\n\r*@arg* `buttonId` - button id to save the array, global variable by default.",
 		},
 	},
 	{
@@ -60,7 +60,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		detail: "SAMMI.extCommand(name, color = 3355443, height = 52, boxes)",
 		documentation: {
 			kind: MarkupKind.Markdown,
-			value: "Send an extension command (to create extension boxes) to SAMMI\n\r*@arg* `name` - name of the extension command\n\r*@arg* `color` - box color, accepts dec colors\n\r*@arg* `height` - height of the box in pixels, you can use 52 for regular box or 80 for resiable box\n\r*@arg* `boxes` - an object containing box objects (its key is box variable and value is an array of box params)\n\r-*@arg* `boxVariable: [boxName, boxType, defaultValue, (optional)sizeModifier, (optional)selectOptions]`\n\r--*@arg* `boxVariable` - variable to save the box value under\n\r--*@arg* `boxName` - name of the box shown in the user interface\n\r--*@arg* `boxType` - number from 0 to 23\n\r--*@arg* `defaultValue` - ndefault value of the variable\n\r--*@arg* `sizeModifier?` - horizontal box size, 1 is normal\n\r--*@arg* `selectOptions[]?` - array of options for the user to select (when using Select box type)",
+			value: "Send an extension command (to create extension boxes) to SAMMI\n\r*@arg* `name` - name of the extension command\n\r*@arg* `color` - box color, accepts dec colors\n\r*@arg* `height` - height of the box in pixels, you can use 52 for regular box or 80 for resizable box\n\r*@arg* `boxes` - an object containing box objects (its key is box variable and value is an array of box params)\n\r-*@arg* `boxVariable: [boxName, boxType, defaultValue, (optional)sizeModifier, (optional)selectOptions]`\n\r--*@arg* `boxVariable` - variable to save the box value under\n\r--*@arg* `boxName` - name of the box shown in the user interface\n\r--*@arg* `boxType` - number from 0 to 23\n\r--*@arg* `defaultValue` - default value of the variable\n\r--*@arg* `sizeModifier?` - horizontal box size, 1 is normal\n\r--*@arg* `selectOptions[]?` - array of options for the user to select (when using Select box type)",
 		},
 	},
 	{
