@@ -17,7 +17,7 @@
 		"html": {
 			"name": "html.block.sef",
 			"begin": "\\[insert_external]",
-			"end": "\\[insert_command",
+			"end": "\\[insert_",
 			"captures": {
 				"0": {
 					"name": "keyword.control.sef"
@@ -31,7 +31,7 @@
 		},
 		"js": {
 			"name": "js.block.sef",
-			"begin": "\\]",
+			"begin": "command\\]",
 			"end": "\\[insert_over\\]",
 			"captures": {
 				"0": {
