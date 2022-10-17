@@ -1,7 +1,7 @@
 import * as path from "path";
 import { commands, CompletionList, ExtensionContext, Uri, workspace } from "vscode";
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from "vscode-languageclient/node";
-import { getJSVirtualContent, isSAMMIFunction } from "./embeddedSupport";
+import { fileRegion, getVirtualContent } from "./embeddedSupport";
 
 let client: LanguageClient;
 
@@ -22,7 +22,8 @@ export async function activate(context: ExtensionContext) {
 
 	workspace.registerTextDocumentContentProvider("embedded-content", {
 		provideTextDocumentContent: (uri) => {
-			const originalUri = uri.path.slice(1).slice(0, -3);
+			const extension = uri.path.lastIndexOf(".");
+			const originalUri = uri.path.slice(1, extension);
 			const decodedUri = decodeURIComponent(originalUri);
 			return virtualDocumentContents.get(decodedUri);
 		},
@@ -38,14 +39,15 @@ export async function activate(context: ExtensionContext) {
 		},
 		middleware: {
 			provideCompletionItem: async (document, position, context, token, next) => {
-				if (isSAMMIFunction(document, position, true)) {
+				const region = fileRegion(document, position, true);
+				if (region === "SAMMI") {
 					return await next(document, position, context, token);
 				}
 
 				const originalUri = document.uri.toString(true);
-				virtualDocumentContents.set(originalUri, getJSVirtualContent(document.getText()));
+				virtualDocumentContents.set(originalUri, getVirtualContent(region, document.getText()));
 
-				const vdocUriString = `embedded-content://js/${encodeURIComponent(originalUri)}.js`;
+				const vdocUriString = `embedded-content://${region}/${encodeURIComponent(originalUri)}.${region}`;
 				const vdocUri = Uri.parse(vdocUriString);
 				return await commands.executeCommand<CompletionList>(
 					"vscode.executeCompletionItemProvider",
@@ -56,15 +58,16 @@ export async function activate(context: ExtensionContext) {
 			},
 
 			provideHover: async (document, position, token, next) => {
-				if (isSAMMIFunction(document, position)) {
+				const region = fileRegion(document, position);
+				if (region === "SAMMI") {
 					return await next(document, position, token);
 				}
 
 				const originalUri = document.uri.toString(true);
 				const decodedUri = decodeURIComponent(originalUri);
-				virtualDocumentContents.set(originalUri, getJSVirtualContent(document.getText()));
+				virtualDocumentContents.set(originalUri, getVirtualContent(region, document.getText()));
 
-				const vdocUriString = `embedded-content://javascript/${encodeURIComponent(decodedUri)}.js`;
+				const vdocUriString = `embedded-content://${region}/${encodeURIComponent(decodedUri)}.${region}`;
 				const vdocUri = Uri.parse(vdocUriString);
 
 				const hover: any = await commands.executeCommand("vscode.executeHoverProvider", vdocUri, position);
