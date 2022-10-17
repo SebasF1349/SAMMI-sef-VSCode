@@ -13,5 +13,5 @@ shared.webpack.config.js
 .gitignore
 .eslintignore
 .eslintrc.js
-/versions
+versions
 TODO.md
