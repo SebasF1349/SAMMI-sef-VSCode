@@ -1,4 +1,4 @@
-A language server to create **SAMMI extensions** - Syntax Highlight, Snippets, Hover and Autocompletion for SAMMI helpers and JavaScript plus a nice icon.
+A language server to create **SAMMI extensions** - Syntax Highlight, Snippets, Hover and Autocompletion for SAMMI helpers, JavaScript and HTML plus a nice icon.
 
 **Create SAMMI Extensions with ease.**
 
@@ -21,16 +21,28 @@ _This extension is still in Beta phase, please open an issue in the GitHub Repos
 
 ### JavaScript
 
+_(in insert_command, insert_hook and insert_script sections)_
+
 -   Syntax Highlight
 -   Snippets
+-   Hover
+-   Autocompletion
+
+### HTML
+
+_(only in insert_external section)_
+
+-   Syntax Highlight
 -   Hover
 -   Autocompletion
 
 ## Roadmap
 
 -   Improve SAMMI Helpers Hover
--   Add language features for HTML + CSS in the insert_external section
 -   Add SAMMI diagnostics
 -   Add JS diagnostics (this will need a rework)
+-   Add commands
+    -   Extract Extension from Bridge
+    -   Install Extension
 
 SAMMI Icon: Copyright (C) SAMMI 2022. All rights reserved.
