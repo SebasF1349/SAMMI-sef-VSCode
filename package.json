@@ -79,10 +79,10 @@
 		"postinstall": "cd client && npm install && cd ../server && npm install && cd .."
 	},
 	"devDependencies": {
-		"@types/node": "^18.11.0",
-		"@typescript-eslint/eslint-plugin": "^5.40.1",
-		"@typescript-eslint/parser": "^5.40.1",
-		"eslint": "^8.25.0",
+		"@types/node": "^18.11.9",
+		"@typescript-eslint/eslint-plugin": "^5.44.0",
+		"@typescript-eslint/parser": "^5.44.0",
+		"eslint": "^8.28.0",
 		"ts-loader": "^9.4.1",
 		"typescript": "^4.8.4",
 		"webpack": "^5.74.0",
