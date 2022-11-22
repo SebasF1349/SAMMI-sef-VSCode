@@ -25,7 +25,8 @@
 		"vscode": "^1.63.0"
 	},
 	"activationEvents": [
-		"onLanguage:sef"
+		"onLanguage:sef",
+		"onCommand:sammi.installExtension"
 	],
 	"main": "./client/out/extension.js",
 	"contributes": {
@@ -62,7 +63,24 @@
 				"language": "sef",
 				"path": "./snippets/snippets.json"
 			}
-		]
+		],
+		"commands": [
+			{
+				"command": "sammi.installExtension",
+				"title": "SAMMI: Install Extension"
+			}
+		],
+		"configuration": {
+			"id": "sammi",
+			"title": "SAMMI Extension",
+			"properties": {
+				"sammi.bridge.path": {
+					"markdownDescription": "The absolute **folder path** of the **Bridge** to install the extension (without the bridge.html)",
+					"type": "string",
+					"scope": "machine"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run webpack",
