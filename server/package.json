@@ -5,7 +5,7 @@
 	"author": "SebasF1349",
 	"license": "GPL-3.0-only",
 	"engines": {
-		"node": "*"
+		"node": "18.12.1"
 	},
 	"dependencies": {
 		"vscode-html-languageservice": "^5.0.2",
