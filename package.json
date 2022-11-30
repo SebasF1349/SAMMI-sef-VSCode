@@ -71,13 +71,40 @@
 			}
 		],
 		"configuration": {
-			"id": "sammi",
+			"id": "SAMMI",
 			"title": "SAMMI Extension",
 			"properties": {
-				"sammi.bridge.path": {
-					"markdownDescription": "The absolute **folder path** of the **Bridge** to install the extension (without the bridge.html)",
+				"SAMMI.bridge.mainPath": {
+					"markdownDescription": "The absolute folder path of the **Bridge** to install the extension (file name and extension included)",
 					"type": "string",
-					"scope": "machine"
+					"scope": "machine",
+					"order": 0
+				},
+				"SAMMI.bridge.extraPaths": {
+					"markdownDescription": "Add more Bridge paths",
+					"scope": "machine",
+					"type": "array",
+					"order": 1,
+					"items": {
+						"type": "object",
+						"title": "Add new Bridge paths in each position",
+						"properties": {
+							"name": {
+								"type": "string",
+								"description": "Name of the Bridge that will be shown in the command"
+							},
+							"path": {
+								"type": "string",
+								"description": "Absolute path of the Bridge"
+							}
+						}
+					},
+					"default": [
+						{
+							"name": "",
+							"description": ""
+						}
+					]
 				}
 			}
 		}
