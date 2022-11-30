@@ -6,7 +6,9 @@ _**SAMMI** is a fully customizable Stream Deck that lets your Twitch and YouTube
 
 More info in the [SAMMI Website](https://sammi.solutions/docs/)
 
-<img src="/images/showOff.gif" alt="Example of usage" style="display: block; margin: 0 auto" />
+<div style="text-align: center;">
+![Example of usage](/images/showOff.gif)
+</div>
 
 > **Warning**
 > This extension is still in Beta phase, please open an issue in the GitHub Repository if you encounter any bug or has any suggestion that's not in the roadmap.
@@ -77,7 +79,9 @@ Your main Bridge can be added directly from the UI or use the property "SAMMI.br
 
 To install an extension, **you need to have your extension open in the active tab** (check it's saved), open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Install Extension`. A prompt will open to specify the bridge to install. It will show the bridges you previously saved and an option to add a new bridge in case you want to select a new one.
 
-<img src="/images/InstallExtension_SelectBridge.png" alt="Select Bridge" style="display: block; margin: 0 auto" />
+<div style="text-align: center;">
+![Select Bridge](/images/InstallExtension_SelectBridge.png)
+</div>
 
 If the extension and bridge are correctly formatted, the former will be installed (previously uninstalling any older version). A `[bridgeFileName]_backup.html` will be created in case the installation process go wrong.
 
