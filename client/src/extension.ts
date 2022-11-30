@@ -1,11 +1,54 @@
 import * as path from "path";
-import { commands, CompletionList, ExtensionContext, Uri, workspace } from "vscode";
+import { commands, CompletionList, ExtensionContext, Uri, window, workspace } from "vscode";
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from "vscode-languageclient/node";
 import { fileRegion, getVirtualContent } from "./embeddedSupport";
+import { installExtension } from "./utils/installExtension";
 
 let client: LanguageClient;
 
 export async function activate(context: ExtensionContext) {
+	context.subscriptions.push(
+		commands.registerCommand("sammi.installExtension", async () => {
+			const bridges: { [key: string]: string } = {};
+			const mainBridge: string | undefined = workspace.getConfiguration().get("SAMMI.bridge.mainPath");
+			interface ExtraBridges {
+				name: string;
+				path: string;
+			}
+			const extraBridges: ExtraBridges[] | undefined = workspace.getConfiguration().get("SAMMI.bridge.extraPaths");
+			if (mainBridge) {
+				bridges.main = mainBridge;
+			}
+			if (extraBridges && extraBridges[0].name) {
+				for (let i = 0; i < extraBridges.length; i++) {
+					if (extraBridges[i].name && extraBridges[i].path) bridges[extraBridges[i].name] = extraBridges[i].path;
+				}
+			}
+			bridges["Add New Bridge"] = "new";
+			const selection = await window.showQuickPick(Object.keys(bridges));
+			if (selection) {
+				let bridgePath: string;
+				if (bridges[selection] === "new") {
+					const newBridge = await window.showInputBox();
+					if (newBridge) {
+						bridgePath = newBridge;
+					} else {
+						window.showInformationMessage(`Missing Bridge Path`);
+						return;
+					}
+				} else {
+					bridgePath = bridges[selection];
+				}
+				window.showInformationMessage(`Bridge: ${bridgePath}`);
+				const extensionPath = window.activeTextEditor?.document.uri.fsPath || "D:\\Date_Math.lb2";
+				await installExtension(bridgePath, extensionPath);
+			} else {
+				window.showInformationMessage(`Missing Bridge Path`);
+				return;
+			}
+		})
+	);
+
 	const serverModule = context.asAbsolutePath(path.join("server", "out", "server.js"));
 	const debugOptions = { execArgv: ["--nolazy", "--inspect=6009"] };
 
