@@ -137,7 +137,7 @@ export async function installExtension(bridgePath: string, extensionPath: string
 		bridgeExtSections[0] +
 		`\n<div id="content-${extSectionsContent[0].replaceAll(" ", "_")}" class="tab-pane" data-version="${extSectionsContent[2]}" title="${
 			extSectionsContent[0]
-		}">"${extSectionsContent[3]}</div>\n` +
+		}">${extSectionsContent[3]}</div>\n` +
 		bridgeExtSections[1] +
 		newBridgeContent.slice(bridgeSectionsPos[0], bridgeSectionsPos[1]) +
 		`\n` +
