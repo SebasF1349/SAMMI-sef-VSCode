@@ -7,7 +7,7 @@ const extensionSectionsCompletionHover: CompletionPlusHover[] = [
 		label: "extension_name",
 		insertText: "[extension_name]",
 		kind: CompletionItemKind.Function,
-		data: 23,
+		data: 27,
 		detail: "Name of the Extension",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -18,7 +18,7 @@ const extensionSectionsCompletionHover: CompletionPlusHover[] = [
 		label: "extension_info",
 		insertText: "[extension_info]",
 		kind: CompletionItemKind.Function,
-		data: 24,
+		data: 28,
 		detail: "Author name information",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -29,7 +29,7 @@ const extensionSectionsCompletionHover: CompletionPlusHover[] = [
 		label: "extension_version",
 		insertText: "[extension_version]",
 		kind: CompletionItemKind.Function,
-		data: 25,
+		data: 29,
 		detail: "Version number",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -40,7 +40,7 @@ const extensionSectionsCompletionHover: CompletionPlusHover[] = [
 		label: "insert_external",
 		insertText: "[insert_external]",
 		kind: CompletionItemKind.Function,
-		data: 26,
+		data: 30,
 		detail: "Extension tab content in Bridge",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -51,7 +51,7 @@ const extensionSectionsCompletionHover: CompletionPlusHover[] = [
 		label: "insert_command",
 		insertText: "[insert_command]",
 		kind: CompletionItemKind.Function,
-		data: 27,
+		data: 31,
 		detail: "Defines command/s",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -62,7 +62,7 @@ const extensionSectionsCompletionHover: CompletionPlusHover[] = [
 		label: "insert_hook",
 		insertText: "[insert_hook]",
 		kind: CompletionItemKind.Function,
-		data: 28,
+		data: 32,
 		detail: "Hooks command with JS functions",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -73,7 +73,7 @@ const extensionSectionsCompletionHover: CompletionPlusHover[] = [
 		label: "insert_script",
 		insertText: "[insert_script]",
 		kind: CompletionItemKind.Function,
-		data: 29,
+		data: 33,
 		detail: "Extension behavior code",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -84,7 +84,7 @@ const extensionSectionsCompletionHover: CompletionPlusHover[] = [
 		label: "insert_over",
 		insertText: "[insert_over]",
 		kind: CompletionItemKind.Function,
-		data: 30,
+		data: 34,
 		detail: "Deck to install",
 		documentation: {
 			kind: MarkupKind.Markdown,
