@@ -15,6 +15,7 @@ import {
 import { extensionSectionsCompletionHover } from "./features/extensionSections";
 import { SAMMIMethodsCompletionHover } from "./features/SAMMIMethods";
 import { getWord } from "./utils/getWord";
+import { sammiDiagnostics } from "./utils/SAMMIHelpersDiagnostics";
 
 const connection = createConnection(ProposedFeatures.all);
 
@@ -33,6 +34,23 @@ connection.onInitialize((_params: InitializeParams) => {
 	};
 
 	return result;
+});
+
+function validate(document: TextDocument): void {
+	const diagnostics = sammiDiagnostics(document);
+	connection.sendDiagnostics({
+		uri: document.uri,
+		version: document.version,
+		diagnostics: diagnostics,
+	});
+}
+
+documents.onDidOpen((event) => {
+	validate(event.document);
+});
+
+documents.onDidChangeContent((event) => {
+	validate(event.document);
 });
 
 connection.onCompletion(({ textDocument, position }: TextDocumentPositionParams): CompletionItem[] | undefined => {
