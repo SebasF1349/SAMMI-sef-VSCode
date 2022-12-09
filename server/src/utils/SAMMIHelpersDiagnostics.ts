@@ -118,7 +118,7 @@ export function sammiDiagnostics(document: TextDocument) {
 		while (helper !== -1) {
 			const argsStart = fullText.indexOf("(", helper) + 1;
 			const possibleArgText = fullText.slice(argsStart);
-			const args = countArgs(possibleArgText);
+			const args = countCommas(possibleArgText);
 			let argsNumber = args.commasCount + 1;
 			const argsLength = args.argsLength;
 			if (argsLength === 0) argsNumber = 0;
@@ -137,7 +137,7 @@ export function sammiDiagnostics(document: TextDocument) {
 	return diagnostics;
 }
 
-function countArgs(text: string) {
+function countCommas(text: string) {
 	const wrappers = new Map([
 		["{", "}"],
 		["[", "]"],
