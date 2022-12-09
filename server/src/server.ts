@@ -49,8 +49,13 @@ documents.onDidOpen((event) => {
 	validate(event.document);
 });
 
+let timeoutID: NodeJS.Timeout;
+
 documents.onDidChangeContent((event) => {
-	validate(event.document);
+	clearTimeout(timeoutID);
+	timeoutID = setTimeout(() => {
+		validate(event.document);
+	}, 1000);
 });
 
 connection.onCompletion(({ textDocument, position }: TextDocumentPositionParams): CompletionItem[] | undefined => {
