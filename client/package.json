@@ -3,7 +3,7 @@
 	"description": "Extension client",
 	"author": "SebasF1349",
 	"license": "GPL-3.0-only",
-	"version": "0.3.1",
+	"version": "0.4.0",
 	"engines": {
 		"vscode": "^1.63.0"
 	},
