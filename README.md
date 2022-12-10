@@ -21,6 +21,7 @@ More info in the [SAMMI Website](https://sammi.solutions/docs/)
 -   `SAMMItemplate` Snippet
 -   Hover
 -   Autocompletion
+-   Diagnostics
 
 ### JavaScript
 
@@ -46,9 +47,9 @@ _(only in insert_external section)_
 ## Roadmap
 
 -   Improve SAMMI Helpers Hover
--   Add SAMMI diagnostics
--   Add JS diagnostics (this will need a rework)
--   Add commands
+-   Improve SAMMI diagnostics
+-   Add JS diagnostics (this will need a rework or a VSCode API update)
+-   Add command
     -   Extract Extension from Bridge
 
 ---
