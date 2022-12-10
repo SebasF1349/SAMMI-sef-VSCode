@@ -49,7 +49,8 @@ _(only in insert_external section)_
 -   Improve SAMMI Helpers Hover
 -   Improve SAMMI diagnostics
 -   Add JS diagnostics (this will need a rework or a VSCode API update)
--   Add command
+-   Add commands
+    -   Uninstall Extension
     -   Extract Extension from Bridge
 
 ---
