@@ -165,19 +165,9 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		},
 	},
 	{
-		label: "getDeckStatus",
-		kind: CompletionItemKind.Function,
-		data: 17,
-		detail: "SAMMI.getDeckStatus(id)",
-		documentation: {
-			kind: MarkupKind.Markdown,
-			value: "Request current deck status (enabled/disabled)\n\r*@arg* `id` - id of the specified deck (retrieved from getDeckList command)",
-		},
-	},
-	{
 		label: "getImage",
 		kind: CompletionItemKind.Function,
-		data: 18,
+		data: 17,
 		detail: "SAMMI.getImage(fileName)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -187,7 +177,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "getSum",
 		kind: CompletionItemKind.Function,
-		data: 19,
+		data: 18,
 		detail: "SAMMI.getSum(fileName)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -197,7 +187,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "stayInformed",
 		kind: CompletionItemKind.Function,
-		data: 20,
+		data: 19,
 		detail: "SAMMI.stayInformed(enabled)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -208,7 +198,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "getActiveButtons",
 		insertText: "getActiveButtons()",
 		kind: CompletionItemKind.Function,
-		data: 21,
+		data: 20,
 		detail: "SAMMI.getActiveButtons()",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -219,7 +209,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "getModifiedButtons",
 		insertText: "getModifiedButtons()",
 		kind: CompletionItemKind.Function,
-		data: 22,
+		data: 21,
 		detail: "SAMMI.getModifiedButtons()",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -230,7 +220,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "getTwitchList",
 		insertText: "getTwitchList()",
 		kind: CompletionItemKind.Function,
-		data: 23,
+		data: 22,
 		detail: "SAMMI.getTwitchList()",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -240,7 +230,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "trigger",
 		kind: CompletionItemKind.Function,
-		data: 24,
+		data: 23,
 		detail: "SAMMI.trigger(type, data)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -251,7 +241,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "close",
 		insertText: "close()",
 		kind: CompletionItemKind.Function,
-		data: 25,
+		data: 24,
 		detail: "SAMMI.close()",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -262,7 +252,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "generateMessage",
 		insertText: "generateMessage()",
 		kind: CompletionItemKind.Function,
-		data: 26,
+		data: 25,
 		detail: "SAMMI.generateMessage()",
 		documentation: {
 			kind: MarkupKind.Markdown,
