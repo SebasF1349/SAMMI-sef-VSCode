@@ -6,7 +6,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "getVariable",
 		kind: CompletionItemKind.Function,
-		data: 1,
 		detail: "SAMMI.getVariable(name, buttonId = 'global')",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -16,7 +15,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "setVariable",
 		kind: CompletionItemKind.Function,
-		data: 2,
 		detail: "SAMMI.setVariable(name, value, buttonId = 'global')",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -26,7 +24,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "deleteVariable",
 		kind: CompletionItemKind.Function,
-		data: 3,
 		detail: "SAMMI.deleteVariable(name, buttonId = 'global')",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -36,7 +33,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "insertArray",
 		kind: CompletionItemKind.Function,
-		data: 4,
 		detail: "SAMMI.insertArray(arrayName, index, value, buttonId = 'global')",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -46,7 +42,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "deleteArray",
 		kind: CompletionItemKind.Function,
-		data: 5,
 		detail: "SAMMI.deleteArray(arrayName, slot, buttonId = 'global')",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -56,7 +51,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "extCommand",
 		kind: CompletionItemKind.Function,
-		data: 6,
 		detail: "SAMMI.extCommand(name, color = 3355443, height = 52, boxes)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -66,7 +60,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "triggerExt",
 		kind: CompletionItemKind.Function,
-		data: 7,
 		detail: "SAMMI.triggerExt(trigger, pullData)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -76,7 +69,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "triggerButton",
 		kind: CompletionItemKind.Function,
-		data: 8,
 		detail: "SAMMI.triggerButton(id)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -86,7 +78,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "modifyButton",
 		kind: CompletionItemKind.Function,
-		data: 9,
 		detail: "SAMMI.modifyButton(id, color, text, image, border)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -96,7 +87,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "popUp",
 		kind: CompletionItemKind.Function,
-		data: 10,
 		detail: "SAMMI.popUp(message)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -106,7 +96,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "alert",
 		kind: CompletionItemKind.Function,
-		data: 11,
 		detail: "SAMMI.alert(message)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -116,7 +105,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "notification",
 		kind: CompletionItemKind.Function,
-		data: 12,
 		detail: "SAMMI.notification(message)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -127,7 +115,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "getDeckList",
 		insertText: "getDeckList()",
 		kind: CompletionItemKind.Function,
-		data: 13,
 		detail: "SAMMI.getDeckList()",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -137,7 +124,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "getDeck",
 		kind: CompletionItemKind.Function,
-		data: 14,
 		detail: "SAMMI.getDeck(id)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -147,7 +133,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "getDeckStatus",
 		kind: CompletionItemKind.Function,
-		data: 15,
 		detail: "SAMMI.getDeckStatus(id)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -157,7 +142,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "changeDeckStatus",
 		kind: CompletionItemKind.Function,
-		data: 16,
 		detail: "SAMMI.getDeckStatus(id, status)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -167,7 +151,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "getImage",
 		kind: CompletionItemKind.Function,
-		data: 17,
 		detail: "SAMMI.getImage(fileName)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -177,7 +160,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "getSum",
 		kind: CompletionItemKind.Function,
-		data: 18,
 		detail: "SAMMI.getSum(fileName)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -187,7 +169,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "stayInformed",
 		kind: CompletionItemKind.Function,
-		data: 19,
 		detail: "SAMMI.stayInformed(enabled)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -198,7 +179,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "getActiveButtons",
 		insertText: "getActiveButtons()",
 		kind: CompletionItemKind.Function,
-		data: 20,
 		detail: "SAMMI.getActiveButtons()",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -209,7 +189,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "getModifiedButtons",
 		insertText: "getModifiedButtons()",
 		kind: CompletionItemKind.Function,
-		data: 21,
 		detail: "SAMMI.getModifiedButtons()",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -220,7 +199,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "getTwitchList",
 		insertText: "getTwitchList()",
 		kind: CompletionItemKind.Function,
-		data: 22,
 		detail: "SAMMI.getTwitchList()",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -230,7 +208,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 	{
 		label: "trigger",
 		kind: CompletionItemKind.Function,
-		data: 23,
 		detail: "SAMMI.trigger(type, data)",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -241,7 +218,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "close",
 		insertText: "close()",
 		kind: CompletionItemKind.Function,
-		data: 24,
 		detail: "SAMMI.close()",
 		documentation: {
 			kind: MarkupKind.Markdown,
@@ -252,7 +228,6 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		label: "generateMessage",
 		insertText: "generateMessage()",
 		kind: CompletionItemKind.Function,
-		data: 25,
 		detail: "SAMMI.generateMessage()",
 		documentation: {
 			kind: MarkupKind.Markdown,
