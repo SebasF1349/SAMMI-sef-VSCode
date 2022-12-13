@@ -1,5 +1,5 @@
 import * as path from "path";
-import { commands, CompletionList, ExtensionContext, Uri, window, workspace } from "vscode";
+import { commands, CompletionList, ExtensionContext, Hover, ProviderResult, Uri, window, workspace } from "vscode";
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from "vscode-languageclient/node";
 import { fileRegion, getVirtualContent } from "./embeddedSupport";
 import { installExtension } from "./utils/installExtension";
@@ -113,9 +113,11 @@ export async function activate(context: ExtensionContext) {
 				const vdocUriString = `embedded-content://${region}/${encodeURIComponent(decodedUri)}.${region}`;
 				const vdocUri = Uri.parse(vdocUriString);
 
-				const hover: any = await commands.executeCommand("vscode.executeHoverProvider", vdocUri, position);
+				const hover: ProviderResult<Hover[]> = await commands.executeCommand("vscode.executeHoverProvider", vdocUri, position);
 
-				return hover[0];
+				if (hover) return hover[0];
+
+				return;
 			},
 		},
 	};
