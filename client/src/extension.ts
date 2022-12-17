@@ -82,6 +82,7 @@ export async function activate(context: ExtensionContext) {
 		},
 		middleware: {
 			provideCompletionItem: async (document, position, context, token, next) => {
+				await workspace.openTextDocument(document.uri);
 				const region = fileRegion(document, position, true);
 				if (region === "SAMMI") {
 					return await next(document, position, context, token);
