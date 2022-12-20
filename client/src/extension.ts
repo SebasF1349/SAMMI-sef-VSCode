@@ -2,50 +2,88 @@ import * as path from "path";
 import { commands, CompletionList, ExtensionContext, Hover, ProviderResult, Uri, window, workspace } from "vscode";
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from "vscode-languageclient/node";
 import { fileRegion, getVirtualContent } from "./embeddedSupport";
-import { installExtension } from "./utils/installExtension";
+import { installExtension, uninstallExtension } from "./utils/extensionCommands";
+import { getBridges, getExtensionNames, readFile, saveBridge } from "./utils/extensionHelpers";
 
 let client: LanguageClient;
 
 export async function activate(context: ExtensionContext) {
 	context.subscriptions.push(
 		commands.registerCommand("sammi.installExtension", async () => {
-			const bridges: { [key: string]: string } = {};
-			const mainBridge: string | undefined = workspace.getConfiguration().get("SAMMI.bridge.mainPath");
-			interface ExtraBridges {
-				name: string;
-				path: string;
+			const extensionPath = window.activeTextEditor?.document.uri.fsPath;
+			if (extensionPath === undefined) {
+				window.showInformationMessage(`There is no file open`);
+				return;
 			}
-			const extraBridges: ExtraBridges[] | undefined = workspace.getConfiguration().get("SAMMI.bridge.extraPaths");
-			if (mainBridge) {
-				bridges.main = mainBridge;
-			}
-			if (extraBridges && extraBridges[0].name) {
-				for (let i = 0; i < extraBridges.length; i++) {
-					if (extraBridges[i].name && extraBridges[i].path) bridges[extraBridges[i].name] = extraBridges[i].path;
-				}
-			}
-			bridges["Add New Bridge"] = "new";
+			const bridges = getBridges();
 			const selection = await window.showQuickPick(Object.keys(bridges));
-			if (selection) {
-				let bridgePath: string;
-				if (bridges[selection] === "new") {
-					const newBridge = await window.showInputBox();
-					if (newBridge) {
-						bridgePath = newBridge;
-					} else {
-						window.showInformationMessage(`Missing Bridge Path`);
-						return;
-					}
-				} else {
-					bridgePath = bridges[selection];
-				}
-				window.showInformationMessage(`Bridge: ${bridgePath}`);
-				const extensionPath = window.activeTextEditor?.document.uri.fsPath || "D:\\Date_Math.lb2";
-				await installExtension(bridgePath, extensionPath);
-			} else {
+			if (selection === undefined) {
 				window.showInformationMessage(`Missing Bridge Path`);
 				return;
 			}
+			let bridgePath: string;
+			if (bridges[selection] === "new") {
+				const newBridge = await window.showInputBox();
+				if (newBridge) {
+					bridgePath = newBridge;
+				} else {
+					window.showInformationMessage(`Missing Bridge Path`);
+					return;
+				}
+			} else {
+				bridgePath = bridges[selection];
+			}
+			window.showInformationMessage(`Bridge: ${bridgePath}`);
+			const bridgeContent = await readFile("Bridge", bridgePath);
+			if (bridgeContent === undefined) return;
+			const newBridgeContent = await installExtension(bridgeContent, extensionPath);
+			if (newBridgeContent === undefined) return;
+			saveBridge(bridgePath, newBridgeContent);
+		}),
+
+		commands.registerCommand("sammi.uninstallExtension", async () => {
+			const extensionPath = window.activeTextEditor?.document.uri.fsPath;
+			if (extensionPath === undefined) {
+				window.showInformationMessage(`There is no file open`);
+				return;
+			}
+			const bridges = getBridges();
+			const bridgeSelected = await window.showQuickPick(Object.keys(bridges));
+			if (bridgeSelected === undefined) {
+				window.showInformationMessage(`Missing Bridge Path`);
+				return;
+			}
+			let bridgePath: string;
+			if (bridges[bridgeSelected] === "new") {
+				const newBridge = await window.showInputBox();
+				if (newBridge) {
+					bridgePath = newBridge;
+				} else {
+					window.showInformationMessage(`Missing Bridge Path`);
+					return;
+				}
+			} else {
+				bridgePath = bridges[bridgeSelected];
+			}
+			window.showInformationMessage(`Bridge: ${bridgePath}`);
+			const bridgeContent = await readFile("Bridge", bridgePath);
+			if (bridgeContent === undefined) return;
+			const extensionNames = await getExtensionNames(bridgeContent);
+			if (extensionNames === undefined) return;
+			if (extensionNames.length === 0) {
+				window.showInformationMessage(`There are no extensions installed in the Bridge`);
+				return;
+			}
+			const extensionSelected = await window.showQuickPick(extensionNames);
+			if (!extensionSelected) {
+				window.showInformationMessage(`No extension selected`);
+				return;
+			}
+			const newBridgeContent = uninstallExtension(bridgeContent, extensionSelected);
+			if (newBridgeContent === undefined) {
+				return;
+			}
+			saveBridge(bridgePath, newBridgeContent);
 		})
 	);
 
