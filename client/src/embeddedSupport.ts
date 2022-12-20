@@ -1,10 +1,21 @@
 import { Position, TextDocument } from "vscode";
 import { getWord } from "./utils/getWord";
 
+const extensionSections = [
+	"extension_name",
+	"extension_info",
+	"extension_version",
+	"insert_external",
+	"insert_command",
+	"insert_hook",
+	"insert_script",
+	"insert_over",
+];
+
 export function fileRegion(document: TextDocument, position: Position, completion = false) {
 	const word = getWord(document, position, completion);
 
-	if (word.substring(0, 6) !== "SAMMI.") {
+	if (word.substring(0, 6) !== "SAMMI." && !extensionSections.includes(word)) {
 		if (isInsideJSRegion(document.getText(), document.offsetAt(position))) {
 			return "js";
 		}
@@ -55,13 +66,17 @@ function getJSVirtualContent(documentText: string): string {
 			if (line === "[insert_over]") {
 				isScript = false;
 			}
-			if (isScript === false || line === "[insert_script]" || line === "[insert_hook]" || line === "[insert_command]") {
+			if (isScript === false || line === "[insert_command]") {
 				return " ".repeat(line.length);
+			} else if (line === "[insert_hook]") {
+				return "switch (key) {";
+			} else if (line === "[insert_script]") {
+				return "}";
 			} else {
 				return line;
 			}
 		})
-		.join("\n");
+		.join("\r\n");
 
 	return content;
 }
