@@ -27,7 +27,8 @@
 	"activationEvents": [
 		"onLanguage:sef",
 		"onCommand:sammi.installExtension",
-		"onCommand:sammi.uninstallExtension"
+		"onCommand:sammi.uninstallExtension",
+		"onCommand:sammi.extractExtension"
 	],
 	"main": "./client/out/extension.js",
 	"contributes": {
@@ -73,6 +74,10 @@
 			{
 				"command": "sammi.uninstallExtension",
 				"title": "SAMMI: Uninstall Extension"
+			},
+			{
+				"command": "sammi.extractExtension",
+				"title": "SAMMI: Extract Extension"
 			}
 		],
 		"configuration": {

@@ -159,3 +159,107 @@ export function uninstallExtension(bridgeContent: string, extensionName: string)
 
 	return newBridgeContent;
 }
+
+export function extractExtension(bridgeContent: string, extensionName: string) {
+	const bridgeExtSections = [
+		`<!--${extensionName} external-->`,
+		`<!--${extensionName} external end-->`,
+		`//[${extensionName} command]`,
+		`//[${extensionName} command end]`,
+		`//[${extensionName} hook]`,
+		`//[${extensionName} hook end]`,
+		`//[${extensionName} script]`,
+		`//[${extensionName} script end]`,
+	];
+
+	let isExtInstalled = false;
+	let isExtCorrecltyInstalled = true;
+	const bridgeExtSectionsPos = [bridgeContent.indexOf(bridgeExtSections[0])];
+	if (bridgeExtSectionsPos[0] !== -1) isExtInstalled = true;
+
+	for (let i = 0; i < bridgeExtSections.length; i++) {
+		bridgeExtSectionsPos[i] = bridgeContent.indexOf(bridgeExtSections[i], bridgeExtSectionsPos[i - 1]);
+
+		if (bridgeExtSectionsPos[i] === -1 && isExtInstalled) {
+			isExtCorrecltyInstalled = false;
+			break;
+		} else if (bridgeExtSectionsPos[i] !== -1 && !isExtInstalled) {
+			isExtCorrecltyInstalled = false;
+			break;
+		}
+
+		if (i % 2 === 0) {
+			bridgeExtSectionsPos[i] += bridgeExtSections[i].length;
+			let isThereNewLine = true;
+			while (isThereNewLine) {
+				if (bridgeContent[bridgeExtSectionsPos[i]] === "\n" || bridgeContent[bridgeExtSectionsPos[i]] === "\r") {
+					bridgeExtSectionsPos[i]++;
+				} else {
+					isThereNewLine = false;
+				}
+			}
+		}
+	}
+
+	if (!isExtCorrecltyInstalled) {
+		window.showInformationMessage("Extension was incorrectly installed or incorrectly uninstalled.");
+		return;
+	} else if (!isExtInstalled) {
+		window.showInformationMessage("Extension is not installed.");
+		return;
+	}
+
+	const extSections = [
+		"[extension_name]",
+		"[extension_info]",
+		"[extension_version]",
+		"[insert_external]",
+		"[insert_command]",
+		"[insert_hook]",
+		"[insert_script]",
+		"[insert_over]",
+	] as const;
+
+	const textBeforeExtensionVersion = `<div id="content-${extensionName.replaceAll(" ", "_")}" class="tab-pane" data-version="`;
+
+	const extensionVersionPosStart = bridgeContent.indexOf(textBeforeExtensionVersion) + textBeforeExtensionVersion.length;
+	const extensionVersionPosEnd = bridgeContent.indexOf('"', extensionVersionPosStart);
+
+	const extensionExternalPosStart = bridgeContent.indexOf(`title="${extensionName}">`, extensionVersionPosEnd) + `title="${extensionName}">`.length;
+	let extensionExternalPosEnd: number;
+	let searchSince = extensionExternalPosStart;
+	while (true) {
+		extensionExternalPosEnd = bridgeContent.indexOf(`</div>`, searchSince);
+		if (!bridgeContent.slice(searchSince, extensionExternalPosEnd).includes("<div")) break;
+		searchSince = extensionExternalPosEnd + 1;
+	}
+
+	const extensionContent =
+		extSections[0] +
+		"\n" +
+		extensionName +
+		"\n" +
+		extSections[1] +
+		"\n" +
+		extSections[2] +
+		"\n" +
+		bridgeContent.slice(extensionVersionPosStart, extensionVersionPosEnd) +
+		"\n" +
+		extSections[3] +
+		"\n" +
+		bridgeContent.slice(extensionExternalPosStart, extensionExternalPosEnd) +
+		"\n" +
+		extSections[4] +
+		"\n" +
+		bridgeContent.slice(bridgeExtSectionsPos[2], bridgeExtSectionsPos[3]) +
+		"\n" +
+		extSections[5] +
+		"\n" +
+		bridgeContent.slice(bridgeExtSectionsPos[4], bridgeExtSectionsPos[5]) +
+		"\n" +
+		extSections[6] +
+		"\n" +
+		bridgeContent.slice(bridgeExtSectionsPos[6], bridgeExtSectionsPos[7]);
+
+	return extensionContent;
+}
