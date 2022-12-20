@@ -53,6 +53,7 @@ _(only in insert_external section)_
 -   Improve SAMMI Helpers Hover
 -   Improve SAMMI diagnostics
 -   Add JS diagnostics (this will need a rework or a VSCode API update)
+-   Install decks
 
 ---
 
@@ -64,29 +65,28 @@ _(only in insert_external section)_
 
 ### Install Extension
 
-To install an extension, **you need to have your extension open in the active tab** (check it's saved), open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Install Extension`.
+-   **The extension to install MUST be open in the active tab**.
+-   Open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Install Extension`.
+-   A prompt will open to specify the bridge to install.
+-   If the extension and bridge are correctly formatted, the former will be installed (previously uninstalling any older version).
+-   A `[bridgeFileName]_backup.html` will be created in case the installation process go wrong.
 
-A prompt will open to specify the bridge to install.
-
-If the extension and bridge are correctly formatted, the former will be installed (previously uninstalling any older version). A `[bridgeFileName]_backup.html` will be created in case the installation process go wrong.
-
-For the moment, this command will not install any deck.
+> **Note**
+>
+> For the moment, this command will not install any deck.
 
 ### Uninstall Extension
 
-Open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Uninstall Extension`.
-
-Prompts will guide you to specify the bridge to uninstall from and the extension to remove.
-
-If the extension was previously correctly installed it will proceed. A `[bridgeFileName]_backup.html` will be created in case the installation process go wrong.
+-   Open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Uninstall Extension`.
+-   Prompts will guide to specify the bridge to uninstall from and the extension to remove.
+-   If the extension was previously correctly installed it will proceed.
+-   A `[bridgeFileName]_backup.html` will be created in case the installation process go wrong.
 
 ### Extract Extension
 
-Open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Extract Extension`.
-
-Prompts will guide you to specify the bridge to extract from and the extension to extract.
-
-The extension content will be saved to your clipboard.
+-   Open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Extract Extension`.
+-   Prompts will guide to specify the bridge to extract from and the extension to extract.
+-   The extension content **will be saved to your clipboard**.
 
 ---
 
@@ -116,14 +116,10 @@ Bridges names will then show in the commands prompts when necessary, along with 
 
 ### Highlight Extension Sections
 
-Extension sections "titles" (`[extension_name]`, `[extension_info]`, and so on) are highlighted by default with the SAMMI color, to quickly find each section.
-
-To turn it off, set `"SAMMI.highlight.active"` to false (or use the UI).
-
-To change the color, edit `"SAMMI.highlight.color"` to the prefered hex value (or use the id).
+Extension sections "titles" (`[extension_name]`, `[extension_info]`, and so on) are highlighted by default with the SAMMI color, to quickly find each section. You can turn it off or change its color from settings.json or the UI.
 
 ```json
-"SAMMI.highlight.active": true,
+"SAMMI.highlight.active": false,
 "SAMMI.highlight.color": "#123456"
 ```
 
