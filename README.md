@@ -9,19 +9,21 @@ More info in the [SAMMI Website](https://sammi.solutions/docs/)
 ![Example of usage](/images/showOff.gif)
 
 > **Warning**
+>
 > This extension is still in Beta phase, please open an issue in the GitHub Repository if you encounter any bug or has any suggestion that's not in the roadmap.
 
 ---
 
 ## Features
 
-### SAMMI Helpers
+### SAMMI
 
 -   Syntax Highlight
 -   `SAMMItemplate` Snippet
 -   Hover
 -   Autocompletion
 -   Diagnostics
+-   Highlight for SAMMI Sections
 
 ### JavaScript
 
@@ -43,25 +45,56 @@ _(only in insert_external section)_
 ### Commands
 
 -   Install Extension
+-   Uninstall Extension
+-   Extract Extension
 
 ## Roadmap
 
 -   Improve SAMMI Helpers Hover
 -   Improve SAMMI diagnostics
 -   Add JS diagnostics (this will need a rework or a VSCode API update)
--   Add commands
-    -   Uninstall Extension
-    -   Extract Extension from Bridge
 
 ---
 
 ## Commands
 
+> **Note**
+>
+> To use any of the commands it's recommended (but not obligatory) to add your bridge file path in the settings.json (see Configuration section).
+
 ### Install Extension
 
-To install an extension from VSCode it's recommended (but not obligatory) to add your bridge file path in the settings.json.
+To install an extension, **you need to have your extension open in the active tab** (check it's saved), open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Install Extension`.
 
-Your main Bridge can be added directly from the UI or use the property "SAMMI.bridge.mainPath". This Bridge will be called `main`. Extra Bridges can be used too, with the property "SAMMI.bridge.extraPaths" as shown below.
+A prompt will open to specify the bridge to install.
+
+If the extension and bridge are correctly formatted, the former will be installed (previously uninstalling any older version). A `[bridgeFileName]_backup.html` will be created in case the installation process go wrong.
+
+For the moment, this command will not install any deck.
+
+### Uninstall Extension
+
+Open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Uninstall Extension`.
+
+Prompts will guide you to specify the bridge to uninstall from and the extension to remove.
+
+If the extension was previously correctly installed it will proceed. A `[bridgeFileName]_backup.html` will be created in case the installation process go wrong.
+
+### Extract Extension
+
+Open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Extract Extension`.
+
+Prompts will guide you to specify the bridge to extract from and the extension to extract.
+
+The extension content will be saved to your clipboard.
+
+---
+
+## Configuration
+
+### Add Bridge(s)
+
+Your main Bridge can be added directly from the UI or use the property "SAMMI.bridge.mainPath" settings.json. This Bridge will be called `main`. Extra Bridges can be used too, with the property "SAMMI.bridge.extraPaths" as shown below.
 
 ```json
 "SAMMI.bridge.mainPath": "D:\\SAMMI\\bridge\\bridge.html",
@@ -77,13 +110,22 @@ Your main Bridge can be added directly from the UI or use the property "SAMMI.br
 ]
 ```
 
-To install an extension, **you need to have your extension open in the active tab** (check it's saved), open the Command Palette (Ctrl + Shift + p) and select `SAMMI: Install Extension`. A prompt will open to specify the bridge to install. It will show the bridges you previously saved and an option to add a new bridge in case you want to select a new one.
+Bridges names will then show in the commands prompts when necessary, along with an option to add a new bridge (**which WON'T be saved in the settings.json file**)
 
-![Select Bridge](/images/InstallExtension_SelectBridge.png)
+![Select Bridge](/images/SelectBridge.png)
 
-If the extension and bridge are correctly formatted, the former will be installed (previously uninstalling any older version). A `[bridgeFileName]_backup.html` will be created in case the installation process go wrong.
+### Highlight Extension Sections
 
-For the moment, this command will not install any deck.
+Extension sections "titles" (`[extension_name]`, `[extension_info]`, and so on) are highlighted by default with the SAMMI color, to quickly find each section.
+
+To turn it off, set `"SAMMI.highlight.active"` to false (or use the UI).
+
+To change the color, edit `"SAMMI.highlight.color"` to the prefered hex value (or use the id).
+
+```json
+"SAMMI.highlight.active": true,
+"SAMMI.highlight.color": "#123456"
+```
 
 ---
 
