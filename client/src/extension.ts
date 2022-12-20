@@ -8,10 +8,6 @@ import { getBridges, getExtensionNames, readFile, saveBridge } from "./utils/ext
 let client: LanguageClient;
 
 export async function activate(context: ExtensionContext) {
-	const extensionSectionsDecoration = window.createTextEditorDecorationType({
-		backgroundColor: workspace.getConfiguration().get("SAMMI.highlight.color"),
-	});
-
 	let activeEditor = window.activeTextEditor;
 
 	function updateDecorations() {
@@ -40,6 +36,10 @@ export async function activate(context: ExtensionContext) {
 				range: new Range(activeEditor.document.positionAt(sectionPosStart), activeEditor.document.positionAt(sectionPosEnd)),
 			});
 		}
+
+		const extensionSectionsDecoration = window.createTextEditorDecorationType({
+			backgroundColor: workspace.getConfiguration().get("SAMMI.highlight.color"),
+		});
 
 		activeEditor.setDecorations(extensionSectionsDecoration, extensionSections);
 	}
