@@ -1,5 +1,5 @@
 import * as path from "path";
-import { commands, CompletionList, env, ExtensionContext, Hover, ProviderResult, Uri, window, workspace } from "vscode";
+import { commands, CompletionList, DecorationOptions, env, ExtensionContext, Hover, ProviderResult, Range, Uri, window, workspace } from "vscode";
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from "vscode-languageclient/node";
 import { fileRegion, getVirtualContent } from "./embeddedSupport";
 import { extractExtension, installExtension, uninstallExtension } from "./utils/extensionCommands";
@@ -8,6 +8,81 @@ import { getBridges, getExtensionNames, readFile, saveBridge } from "./utils/ext
 let client: LanguageClient;
 
 export async function activate(context: ExtensionContext) {
+	const extensionSectionsDecoration = window.createTextEditorDecorationType({
+		backgroundColor: workspace.getConfiguration().get("SAMMI.highlight.color"),
+	});
+
+	let activeEditor = window.activeTextEditor;
+
+	function updateDecorations() {
+		if (!activeEditor) {
+			return;
+		}
+		const extSections = [
+			"[extension_name]",
+			"[extension_info]",
+			"[extension_version]",
+			"[insert_external]",
+			"[insert_command]",
+			"[insert_hook]",
+			"[insert_script]",
+			"[insert_over]",
+		];
+
+		const extensionSections: DecorationOptions[] = [];
+		const extensionContent = activeEditor.document.getText();
+
+		for (let i = 0; i < extSections.length; i++) {
+			const sectionPosStart = extensionContent.indexOf(extSections[i]);
+			if (sectionPosStart === -1) continue;
+			const sectionPosEnd = sectionPosStart + extSections[i].length;
+			extensionSections.push({
+				range: new Range(activeEditor.document.positionAt(sectionPosStart), activeEditor.document.positionAt(sectionPosEnd)),
+			});
+		}
+
+		activeEditor.setDecorations(extensionSectionsDecoration, extensionSections);
+	}
+
+	let timeout: NodeJS.Timer | undefined = undefined;
+
+	function triggerUpdateDecorations(throttle = false) {
+		if (timeout) {
+			clearTimeout(timeout);
+			timeout = undefined;
+		}
+		if (throttle) {
+			timeout = setTimeout(updateDecorations, 500);
+		} else {
+			updateDecorations();
+		}
+	}
+
+	if (activeEditor) {
+		triggerUpdateDecorations();
+	}
+
+	window.onDidChangeActiveTextEditor(
+		(editor) => {
+			activeEditor = editor;
+			if (editor) {
+				triggerUpdateDecorations();
+			}
+		},
+		null,
+		context.subscriptions
+	);
+
+	workspace.onDidChangeTextDocument(
+		(event) => {
+			if (activeEditor && event.document === activeEditor.document) {
+				triggerUpdateDecorations(true);
+			}
+		},
+		null,
+		context.subscriptions
+	);
+
 	context.subscriptions.push(
 		commands.registerCommand("sammi.installExtension", async () => {
 			const extensionPath = window.activeTextEditor?.document.uri.fsPath;
