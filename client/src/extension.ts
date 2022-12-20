@@ -47,6 +47,7 @@ export async function activate(context: ExtensionContext) {
 	let timeout: NodeJS.Timer | undefined = undefined;
 
 	function triggerUpdateDecorations(throttle = false) {
+		if (!workspace.getConfiguration().get("SAMMI.highlight.active")) return;
 		if (timeout) {
 			clearTimeout(timeout);
 			timeout = undefined;
