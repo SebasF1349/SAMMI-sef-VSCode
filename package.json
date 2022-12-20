@@ -115,6 +115,20 @@
 							"description": ""
 						}
 					]
+				},
+				"SAMMI.highlight.active": {
+					"markdownDescription": "Highlight SAMMI sections",
+					"type": "boolean",
+					"scope": "machine",
+					"order": 2,
+					"default": "true"
+				},
+				"SAMMI.highlight.color": {
+					"markdownDescription": "Color to Highlight SAMMI sections (only if `#SAMMI.highlight.active#` is set to true)",
+					"type": "string",
+					"scope": "machine",
+					"order": 3,
+					"default": "#142f57"
 				}
 			}
 		}
