@@ -11,10 +11,7 @@ module.exports = {
 		"@typescript-eslint/no-explicit-any": 0,
 		"@typescript-eslint/explicit-module-boundary-types": 0,
 		"@typescript-eslint/no-non-null-assertion": 0,
-		//https://twitter.com/flybayer/status/1580825094774878208
-		"no-cond-assign": "error",
-		"no-constant-condition": "error",
-		"no-unreachable": "error",
+		"no-constant-condition": ["error", { checkLoops: false }],
 		"no-unused-expressions": "error",
 		"no-constant-binary-expression": "error",
 		"no-sequences": "error",
