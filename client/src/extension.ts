@@ -54,10 +54,13 @@ export async function activate(context: ExtensionContext) {
 			});
 		}
 
-		const bgColor: string | undefined = workspace.getConfiguration().get("SAMMI.highlight.color");
+		let bgColor: string | undefined = workspace.getConfiguration().get("SAMMI.highlight.color");
 		let extensionSectionsDecoration: TextEditorDecorationType;
 
 		if (bgColor) {
+			if (!bgColor.startsWith("#")) {
+				bgColor = "#" + bgColor;
+			}
 			extensionSectionsDecoration = window.createTextEditorDecorationType({
 				backgroundColor: bgColor,
 			});
