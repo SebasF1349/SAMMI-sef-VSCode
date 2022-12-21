@@ -28,6 +28,9 @@ export async function activate(context: ExtensionContext) {
 		if (!activeEditor) {
 			return;
 		}
+		if (activeEditor.document.languageId !== "sef") {
+			return;
+		}
 		const extSections = [
 			"[extension_name]",
 			"[extension_info]",
