@@ -1,5 +1,19 @@
 import * as path from "path";
-import { commands, CompletionList, DecorationOptions, env, ExtensionContext, Hover, ProviderResult, Range, Uri, window, workspace } from "vscode";
+import {
+	commands,
+	CompletionList,
+	DecorationOptions,
+	env,
+	ExtensionContext,
+	Hover,
+	ProviderResult,
+	Range,
+	TextEditorDecorationType,
+	ThemeColor,
+	Uri,
+	window,
+	workspace,
+} from "vscode";
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from "vscode-languageclient/node";
 import { fileRegion, getVirtualContent } from "./embeddedSupport";
 import { extractExtension, installExtension, uninstallExtension } from "./utils/extensionCommands";
@@ -37,9 +51,18 @@ export async function activate(context: ExtensionContext) {
 			});
 		}
 
-		const extensionSectionsDecoration = window.createTextEditorDecorationType({
-			backgroundColor: workspace.getConfiguration().get("SAMMI.highlight.color"),
-		});
+		const bgColor: string | undefined = workspace.getConfiguration().get("SAMMI.highlight.color");
+		let extensionSectionsDecoration: TextEditorDecorationType;
+
+		if (bgColor) {
+			extensionSectionsDecoration = window.createTextEditorDecorationType({
+				backgroundColor: bgColor,
+			});
+		} else {
+			extensionSectionsDecoration = window.createTextEditorDecorationType({
+				backgroundColor: new ThemeColor("editor.hoverHighlightBackground"),
+			});
+		}
 
 		activeEditor.setDecorations(extensionSectionsDecoration, extensionSections);
 	}
