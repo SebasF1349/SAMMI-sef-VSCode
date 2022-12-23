@@ -125,7 +125,7 @@ export function sammiDiagnostics(document: TextDocument) {
 			if (!SAMMIHelpers[i].args.includes(argsNumber)) {
 				diagnostics.push(
 					Diagnostic.create(
-						Range.create(document.positionAt(argsStart), document.positionAt(argsStart + argsLength)),
+						Range.create(document.positionAt(argsStart), document.positionAt(argsStart + args.endArgs)),
 						`Incorrect number of arguments`,
 						DiagnosticSeverity.Error
 					)
@@ -173,5 +173,5 @@ function countCommas(text: string) {
 		}
 	}
 	const argsLength = text.slice(0, endArgs).trim().length;
-	return { commasCount, argsLength };
+	return { commasCount, argsLength, endArgs };
 }
