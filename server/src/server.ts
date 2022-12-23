@@ -67,7 +67,7 @@ connection.onCompletion(({ textDocument, position }: TextDocumentPositionParams)
 
 	const prefix = getWord(document, position);
 
-	if (prefix === "SAMMI.") {
+	if (prefix.word === "SAMMI.") {
 		return SAMMIMethodsCompletionHover;
 	}
 	return;
@@ -79,20 +79,29 @@ connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
 
 connection.onHover(({ textDocument, position }): Hover | undefined => {
 	const document = documents.get(textDocument.uri) || TextDocument.create("", "sef", 1, "");
-	let word = getWord(document, position);
+	// eslint-disable-next-line prefer-const
+	let { word, isMethod } = getWord(document, position);
 	let hover = "";
 	let hoverList;
 
 	if (word.slice(0, 6) === "SAMMI.") {
 		hoverList = SAMMIMethodsCompletionHover;
-		word = word.slice(6);
+		if (isMethod) {
+			word = word.slice(6);
+		} else {
+			word = "SAMMI";
+		}
 	} else {
 		hoverList = extensionSectionsCompletionHover;
 	}
 
-	for (const methodHover of hoverList) {
-		if (word === methodHover.label) {
-			hover = methodHover.detail + "\n\r" + methodHover.documentation.value;
+	if (word === "SAMMI") {
+		hover = "```JavaScript\nSAMMI.helperfunction()\n```\n\rProvides helpers to send and receive data with the SAMMI websocket libreary.";
+	} else {
+		for (const methodHover of hoverList) {
+			if (word === methodHover.label) {
+				hover = "```JavaScript\n" + methodHover.detail + "\n```\n\r" + methodHover.documentation.value;
+			}
 		}
 	}
 

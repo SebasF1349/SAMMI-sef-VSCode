@@ -29,5 +29,10 @@ export function getWord(document: TextDocument, position: Position) {
 		[-1, text.length - 1]
 	);
 
-	return text.substring(limits[0] + 1, limits[1]);
+	let isMethod = false;
+	if (text.lastIndexOf(".", index) > limits[0]) {
+		isMethod = true;
+	}
+
+	return { word: text.substring(limits[0] + 1, limits[1]), isMethod };
 }
