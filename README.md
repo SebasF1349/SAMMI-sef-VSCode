@@ -50,7 +50,6 @@ _(only in insert_external section)_
 
 ## Roadmap
 
--   Improve SAMMI Helpers Hover
 -   Improve SAMMI diagnostics
 -   Add JS diagnostics (this will need a rework or a VSCode API update)
 -   Install decks
