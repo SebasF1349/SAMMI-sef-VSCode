@@ -63,7 +63,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		detail: "SAMMI.triggerExt(trigger, pullData)",
 		documentation: {
 			kind: MarkupKind.Markdown,
-			value: "Triggers an Extension Trigger\n\r*@arg* `trigger` - name of the trigger\n\r*@arg* `data` - object containing all trigger pull data (can contain objects, arrays etc.)",
+			value: "Triggers an Extension Trigger\n\r*@arg* `trigger` - name of the trigger\n\r*@arg* `data?` - object containing all trigger pull data (can contain objects, arrays etc.)",
 		},
 	},
 	{

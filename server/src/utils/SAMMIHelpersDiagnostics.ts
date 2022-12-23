@@ -34,7 +34,7 @@ const SAMMIHelpers: SAMMIHelper[] = [
 	},
 	{
 		name: "triggerExt",
-		args: [2],
+		args: [1, 2],
 	},
 	{
 		name: "triggerButton",
