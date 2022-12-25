@@ -1,22 +1,23 @@
 import { window } from "vscode";
 import { readFile } from "./extensionHelpers";
 
+const extSections = [
+	"[extension_name]",
+	"[extension_info]",
+	"[extension_version]",
+	"[insert_external]",
+	"[insert_command]",
+	"[insert_hook]",
+	"[insert_script]",
+	"[insert_over]",
+] as const;
+
 export async function installExtension(bridgeContent: string, extensionPath: string) {
 	const extensionContent = await readFile("Extension", extensionPath);
 	if (extensionContent === undefined) {
 		return;
 	}
 
-	const extSections = [
-		"[extension_name]",
-		"[extension_info]",
-		"[extension_version]",
-		"[insert_external]",
-		"[insert_command]",
-		"[insert_hook]",
-		"[insert_script]",
-		"[insert_over]",
-	];
 	const extSectionPos: number[] = [];
 	const extSectionsContent: string[] = [];
 	let pos = 0;
@@ -46,7 +47,7 @@ export async function installExtension(bridgeContent: string, extensionPath: str
 		`//[${extensionName} hook end]`,
 		`//[${extensionName} script]`,
 		`//[${extensionName} script end]`,
-	];
+	] as const;
 
 	let newBridgeContent = uninstallExtension(bridgeContent, extensionName);
 	if (newBridgeContent === undefined) return;
@@ -112,7 +113,7 @@ export function uninstallExtension(bridgeContent: string, extensionName: string)
 		`//[${extensionName} hook end]`,
 		`//[${extensionName} script]`,
 		`//[${extensionName} script end]`,
-	];
+	] as const;
 
 	let isExtInstalled = false;
 	let isExtCorrecltyInstalled = true;
@@ -170,7 +171,7 @@ export function extractExtension(bridgeContent: string, extensionName: string) {
 		`//[${extensionName} hook end]`,
 		`//[${extensionName} script]`,
 		`//[${extensionName} script end]`,
-	];
+	] as const;
 
 	let isExtInstalled = false;
 	let isExtCorrecltyInstalled = true;
@@ -208,17 +209,6 @@ export function extractExtension(bridgeContent: string, extensionName: string) {
 		window.showInformationMessage("Extension is not installed.");
 		return;
 	}
-
-	const extSections = [
-		"[extension_name]",
-		"[extension_info]",
-		"[extension_version]",
-		"[insert_external]",
-		"[insert_command]",
-		"[insert_hook]",
-		"[insert_script]",
-		"[insert_over]",
-	] as const;
 
 	const textBeforeExtensionVersion = `<div id="content-${extensionName.replaceAll(" ", "_")}" class="tab-pane" data-version="`;
 

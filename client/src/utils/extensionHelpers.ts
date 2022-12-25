@@ -48,7 +48,7 @@ export async function getExtensionNames(bridgeContent: string) {
 	return extensionNames;
 }
 
-export function getBridges() {
+function getBridges() {
 	const bridges: { [key: string]: string } = {};
 	const mainBridge: string | undefined = workspace.getConfiguration().get("SAMMI.bridge.mainPath");
 	interface ExtraBridges {
@@ -66,4 +66,35 @@ export function getBridges() {
 	}
 	bridges["Add New Bridge"] = "new";
 	return bridges;
+}
+
+export async function getBridgeContent() {
+	const returnObj = { bridgeContent: "", bridgePath: "", error: false };
+	const bridges = getBridges();
+	const bridgeSelected = await window.showQuickPick(Object.keys(bridges));
+	if (bridgeSelected === undefined) {
+		window.showInformationMessage(`Missing Bridge Path`);
+		returnObj.error = true;
+		return returnObj;
+	}
+	if (bridges[bridgeSelected] === "new") {
+		const newBridge = await window.showInputBox();
+		if (newBridge) {
+			returnObj.bridgePath = newBridge;
+		} else {
+			window.showInformationMessage(`Missing Bridge Path`);
+			returnObj.error = true;
+			return returnObj;
+		}
+	} else {
+		returnObj.bridgePath = bridges[bridgeSelected];
+	}
+	window.showInformationMessage(`Bridge: ${returnObj.bridgePath}`);
+	const bridgeContent = await readFile("Bridge", returnObj.bridgePath);
+	if (bridgeContent === undefined) {
+		returnObj.error = true;
+		return returnObj;
+	}
+	returnObj.bridgeContent = bridgeContent;
+	return returnObj;
 }
