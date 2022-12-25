@@ -17,7 +17,7 @@ import {
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from "vscode-languageclient/node";
 import { fileRegion, getVirtualContent } from "./embeddedSupport";
 import { extractExtension, installExtension, uninstallExtension } from "./utils/extensionCommands";
-import { getBridges, getExtensionNames, readFile, saveBridge } from "./utils/extensionHelpers";
+import { getBridgeContent, getExtensionNames, saveBridge } from "./utils/extensionHelpers";
 
 let client: LanguageClient;
 
@@ -40,7 +40,7 @@ export async function activate(context: ExtensionContext) {
 			"[insert_hook]",
 			"[insert_script]",
 			"[insert_over]",
-		];
+		] as const;
 
 		const extensionSections: DecorationOptions[] = [];
 		const extensionContent = activeEditor.document.getText();
@@ -120,27 +120,8 @@ export async function activate(context: ExtensionContext) {
 				window.showInformationMessage(`There is no file open`);
 				return;
 			}
-			const bridges = getBridges();
-			const selection = await window.showQuickPick(Object.keys(bridges));
-			if (selection === undefined) {
-				window.showInformationMessage(`Missing Bridge Path`);
-				return;
-			}
-			let bridgePath: string;
-			if (bridges[selection] === "new") {
-				const newBridge = await window.showInputBox();
-				if (newBridge) {
-					bridgePath = newBridge;
-				} else {
-					window.showInformationMessage(`Missing Bridge Path`);
-					return;
-				}
-			} else {
-				bridgePath = bridges[selection];
-			}
-			window.showInformationMessage(`Bridge: ${bridgePath}`);
-			const bridgeContent = await readFile("Bridge", bridgePath);
-			if (bridgeContent === undefined) return;
+			const { bridgeContent, bridgePath, error } = await getBridgeContent();
+			if (error === true) return;
 			const newBridgeContent = await installExtension(bridgeContent, extensionPath);
 			if (newBridgeContent === undefined) return;
 			saveBridge(bridgePath, newBridgeContent);
@@ -152,27 +133,8 @@ export async function activate(context: ExtensionContext) {
 				window.showInformationMessage(`There is no file open`);
 				return;
 			}
-			const bridges = getBridges();
-			const bridgeSelected = await window.showQuickPick(Object.keys(bridges));
-			if (bridgeSelected === undefined) {
-				window.showInformationMessage(`Missing Bridge Path`);
-				return;
-			}
-			let bridgePath: string;
-			if (bridges[bridgeSelected] === "new") {
-				const newBridge = await window.showInputBox();
-				if (newBridge) {
-					bridgePath = newBridge;
-				} else {
-					window.showInformationMessage(`Missing Bridge Path`);
-					return;
-				}
-			} else {
-				bridgePath = bridges[bridgeSelected];
-			}
-			window.showInformationMessage(`Bridge: ${bridgePath}`);
-			const bridgeContent = await readFile("Bridge", bridgePath);
-			if (bridgeContent === undefined) return;
+			const { bridgeContent, bridgePath, error } = await getBridgeContent();
+			if (error === true) return;
 			const extensionNames = await getExtensionNames(bridgeContent);
 			if (extensionNames === undefined) return;
 			if (extensionNames.length === 0) {
@@ -197,27 +159,8 @@ export async function activate(context: ExtensionContext) {
 				window.showInformationMessage(`There is no file open`);
 				return;
 			}
-			const bridges = getBridges();
-			const bridgeSelected = await window.showQuickPick(Object.keys(bridges));
-			if (bridgeSelected === undefined) {
-				window.showInformationMessage(`Missing Bridge Path`);
-				return;
-			}
-			let bridgePath: string;
-			if (bridges[bridgeSelected] === "new") {
-				const newBridge = await window.showInputBox();
-				if (newBridge) {
-					bridgePath = newBridge;
-				} else {
-					window.showInformationMessage(`Missing Bridge Path`);
-					return;
-				}
-			} else {
-				bridgePath = bridges[bridgeSelected];
-			}
-			window.showInformationMessage(`Bridge: ${bridgePath}`);
-			const bridgeContent = await readFile("Bridge", bridgePath);
-			if (bridgeContent === undefined) return;
+			const { bridgeContent, error } = await getBridgeContent();
+			if (error === true) return;
 			const extensionNames = await getExtensionNames(bridgeContent);
 			if (extensionNames === undefined) return;
 			if (extensionNames.length === 0) {
