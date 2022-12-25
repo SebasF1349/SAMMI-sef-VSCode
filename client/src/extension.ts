@@ -120,6 +120,10 @@ export async function activate(context: ExtensionContext) {
 				window.showInformationMessage(`There is no file open`);
 				return;
 			}
+			if (window.activeTextEditor?.document.languageId !== "sef") {
+				window.showInformationMessage(`There is no sef file open or active`);
+				return;
+			}
 			const { bridgeContent, bridgePath, error } = await getBridgeContent();
 			if (error === true) return;
 			const newBridgeContent = await installExtension(bridgeContent, extensionPath);
@@ -131,6 +135,10 @@ export async function activate(context: ExtensionContext) {
 			const extensionPath = window.activeTextEditor?.document.uri.fsPath;
 			if (extensionPath === undefined) {
 				window.showInformationMessage(`There is no file open`);
+				return;
+			}
+			if (window.activeTextEditor?.document.languageId !== "sef") {
+				window.showInformationMessage(`There is no sef file open or active`);
 				return;
 			}
 			const { bridgeContent, bridgePath, error } = await getBridgeContent();
@@ -157,6 +165,10 @@ export async function activate(context: ExtensionContext) {
 			const extensionPath = window.activeTextEditor?.document.uri.fsPath;
 			if (extensionPath === undefined) {
 				window.showInformationMessage(`There is no file open`);
+				return;
+			}
+			if (window.activeTextEditor?.document.languageId !== "sef") {
+				window.showInformationMessage(`There is no sef file open or active`);
 				return;
 			}
 			const { bridgeContent, error } = await getBridgeContent();
