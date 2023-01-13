@@ -24,6 +24,22 @@ let client: LanguageClient;
 export async function activate(context: ExtensionContext) {
 	let activeEditor = window.activeTextEditor;
 
+	let bgColor: string | undefined = workspace.getConfiguration().get("SAMMI.highlight.color");
+	let extensionSectionsDecoration: TextEditorDecorationType;
+
+	if (bgColor) {
+		if (!bgColor.startsWith("#")) {
+			bgColor = "#" + bgColor;
+		}
+		extensionSectionsDecoration = window.createTextEditorDecorationType({
+			backgroundColor: bgColor,
+		});
+	} else {
+		extensionSectionsDecoration = window.createTextEditorDecorationType({
+			backgroundColor: new ThemeColor("mergeEditor.conflict.input1.background"),
+		});
+	}
+
 	function updateDecorations() {
 		if (!activeEditor) {
 			return;
@@ -51,22 +67,6 @@ export async function activate(context: ExtensionContext) {
 			const sectionPosEnd = sectionPosStart + extSections[i].length;
 			extensionSections.push({
 				range: new Range(activeEditor.document.positionAt(sectionPosStart), activeEditor.document.positionAt(sectionPosEnd)),
-			});
-		}
-
-		let bgColor: string | undefined = workspace.getConfiguration().get("SAMMI.highlight.color");
-		let extensionSectionsDecoration: TextEditorDecorationType;
-
-		if (bgColor) {
-			if (!bgColor.startsWith("#")) {
-				bgColor = "#" + bgColor;
-			}
-			extensionSectionsDecoration = window.createTextEditorDecorationType({
-				backgroundColor: bgColor,
-			});
-		} else {
-			extensionSectionsDecoration = window.createTextEditorDecorationType({
-				backgroundColor: new ThemeColor("mergeEditor.conflict.input1.background"),
 			});
 		}
 
