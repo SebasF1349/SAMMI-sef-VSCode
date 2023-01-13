@@ -66,7 +66,7 @@ export async function activate(context: ExtensionContext) {
 			});
 		} else {
 			extensionSectionsDecoration = window.createTextEditorDecorationType({
-				backgroundColor: new ThemeColor("editor.hoverHighlightBackground"),
+				backgroundColor: new ThemeColor("mergeEditor.conflict.input1.background"),
 			});
 		}
 
