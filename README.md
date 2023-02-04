@@ -115,7 +115,7 @@ Bridges names will then show in the commands prompts when necessary, along with 
 
 ### Highlight Extension Sections
 
-Extension sections "titles" (`[extension_name]`, `[extension_info]`, and so on) are highlighted by default with the `mergeEditor.conflict.input1.background` color of your theme, to quickly find each section. You can turn it off or change its color from settings.json or the UI.
+Extension sections "titles" (`[extension_name]`, `[extension_info]`, and so on) are highlighted by default with the `mergeEditor.conflict.input1.background` color of your theme, to quickly find each section. You can turn it off or change its color from settings.json or the UI. (You will need to reload VSCode to see the changes take effect)
 
 ```json
 "SAMMI.highlight.active": false,
