@@ -8,9 +8,9 @@ More info in the [SAMMI Website](https://sammi.solutions/docs/)
 
 ![Example of usage](/images/showOff.gif)
 
-> **Warning**
+> **Note**
 >
-> This extension is still in Beta phase, please open an issue in the GitHub Repository if you encounter any bug or has any suggestion that's not in the roadmap.
+> Please open an issue in the GitHub Repository if you encounter any bug or has any suggestion that's not in the roadmap.
 
 ---
 
