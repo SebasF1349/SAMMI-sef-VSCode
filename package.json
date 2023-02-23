@@ -25,6 +25,7 @@
 		"vscode": "^1.63.0"
 	},
 	"main": "./client/out/extension.js",
+	"activationEvents": [],
 	"contributes": {
 		"languages": [
 			{
