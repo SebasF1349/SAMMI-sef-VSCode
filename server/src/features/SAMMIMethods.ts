@@ -18,7 +18,7 @@ const SAMMIMethodsCompletionHover: CompletionPlusHover[] = [
 		detail: "SAMMI.setVariable(name, value, buttonId = 'global')",
 		documentation: {
 			kind: MarkupKind.Markdown,
-			value: "Set a variable\n\r*@arg* `name` - name of the variable\n\r*@arg* `value` - value to save in the variable\n\r*@arg* `buttonId` - button id to save the variable, global variable by default.",
+			value: "Set a variable\n\r*@arg* `name` - name of the variable\n\r*@arg* `value` - value to save in the variable\n\r*@arg* `buttonId` - button id to save the variable, global variable by default.\n\r*@arg* `instanceId` - button instance id to save the variable to a non-persistant button, optional",
 		},
 	},
 	{
