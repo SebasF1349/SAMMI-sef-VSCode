@@ -14,7 +14,7 @@ const SAMMIHelpers: SAMMIHelper[] = [
 	},
 	{
 		name: "setVariable",
-		args: [2, 3],
+		args: [2, 4],
 	},
 	{
 		name: "deleteVariable",
