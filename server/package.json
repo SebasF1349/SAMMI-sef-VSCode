@@ -1,15 +1,15 @@
 {
-	"name": "sammi-sef-server",
-	"description": "Extension server",
-	"version": "1.0.1",
-	"author": "SebasF1349",
-	"license": "GPL-3.0-only",
-	"engines": {
-		"node": "^18.15.0"
-	},
-	"dependencies": {
-		"vscode-html-languageservice": "^5.0.4",
-		"vscode-languageserver": "^8.1.0",
-		"vscode-languageserver-textdocument": "^1.0.8"
-	}
+    "name": "sammi-sef-server",
+    "description": "Extension server",
+    "version": "1.2.0",
+    "author": "SebasF1349",
+    "license": "GPL-3.0-only",
+    "engines": {
+        "node": "^18.15.0"
+    },
+    "dependencies": {
+        "vscode-html-languageservice": "^5.0.4",
+        "vscode-languageserver": "^8.1.0",
+        "vscode-languageserver-textdocument": "^1.0.8"
+    }
 }

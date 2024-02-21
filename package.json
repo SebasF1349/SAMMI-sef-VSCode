@@ -1,156 +1,156 @@
 {
-	"name": "sammi-sef",
-	"displayName": "SAMMI Extension",
-	"description": "A language server to create SAMMI extensions - Syntax Highlight, Snippets, Hover and Autocompletion for SAMMI helpers and JavaScript",
-	"icon": "icon/SAMMI-128x128.png",
-	"author": "SebasF1349",
-	"sponsor": {
-		"url": "https://ko-fi.com/sebasf1349"
-	},
-	"license": "GPL-3.0-only",
-	"version": "1.0.1",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/SebasF1349/SAMMI-sef-VSCode"
-	},
-	"publisher": "SebasF1349",
-	"categories": [
-		"Programming Languages",
-		"Snippets"
-	],
-	"keywords": [
-		"SAMMI"
-	],
-	"engines": {
-		"vscode": "^1.63.0"
-	},
-	"main": "./client/out/extension.js",
-	"activationEvents": [],
-	"contributes": {
-		"languages": [
-			{
-				"id": "sef",
-				"aliases": [
-					"SAMMI Extension",
-					"sef"
-				],
-				"extensions": [
-					"sef"
-				],
-				"configuration": "./language-configuration.json",
-				"icon": {
-					"light": "icon/SAMMI-32x32.png",
-					"dark": "icon/SAMMI-32x32.png"
-				}
-			}
-		],
-		"grammars": [
-			{
-				"language": "sef",
-				"scopeName": "source.sef",
-				"path": "./syntaxes/sef.tmLanguage.json",
-				"embeddedLanguages": {
-					"source.js": "javascript",
-					"text.html.basic": "HTML"
-				}
-			}
-		],
-		"snippets": [
-			{
-				"language": "sef",
-				"path": "./snippets/snippets.json"
-			}
-		],
-		"commands": [
-			{
-				"command": "sammi.installExtension",
-				"title": "SAMMI: Install Extension"
-			},
-			{
-				"command": "sammi.uninstallExtension",
-				"title": "SAMMI: Uninstall Extension"
-			},
-			{
-				"command": "sammi.extractExtension",
-				"title": "SAMMI: Extract Extension"
-			}
-		],
-		"configuration": {
-			"id": "SAMMI",
-			"title": "SAMMI Extension",
-			"properties": {
-				"SAMMI.bridge.mainPath": {
-					"markdownDescription": "The absolute folder path of the **Bridge** to install the extension (file name and extension included)",
-					"type": "string",
-					"scope": "machine",
-					"order": 0
-				},
-				"SAMMI.bridge.extraPaths": {
-					"markdownDescription": "Add more Bridge paths",
-					"scope": "machine",
-					"type": "array",
-					"order": 1,
-					"items": {
-						"type": "object",
-						"title": "Add new Bridge paths in each position",
-						"properties": {
-							"name": {
-								"type": "string",
-								"description": "Name of the Bridge that will be shown in the command"
-							},
-							"path": {
-								"type": "string",
-								"description": "Absolute path of the Bridge"
-							}
-						}
-					},
-					"default": [
-						{
-							"name": "",
-							"description": ""
-						}
-					]
-				},
-				"SAMMI.highlight.active": {
-					"markdownDescription": "Highlight SAMMI sections",
-					"type": "boolean",
-					"scope": "machine",
-					"order": 2,
-					"default": "true"
-				},
-				"SAMMI.highlight.color": {
-					"markdownDescription": "Color to Highlight SAMMI sections (only if `#SAMMI.highlight.active#` is set to true)",
-					"type": "string",
-					"scope": "machine",
-					"order": 3
-				}
-			}
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run webpack",
-		"webpack": "npm run clean && webpack --mode production --config ./client/webpack.config.js && webpack --mode production --config ./server/webpack.config.js",
-		"webpack:dev": "npm run clean && webpack --mode none --config ./client/webpack.config.js && webpack --mode none --config ./server/webpack.config.js",
-		"compile": "tsc -b",
-		"compile:client": "tsc -b ./client/tsconfig.json",
-		"compile:server": "tsc -b ./server/tsconfig.json",
-		"watch": "tsc -b -w",
-		"lint": "npm run lint:client && npm run lint:server",
-		"lint:client": "eslint --config ./client/.eslintrc.json ./client/src/*.ts",
-		"lint:server": "eslint --config ./server/.eslintrc.json ./server/src/*.ts",
-		"clean": "rimraf client/out && rimraf server/out",
-		"postinstall": "cd client && npm install && cd ../server && npm install && cd .."
-	},
-	"devDependencies": {
-		"@types/node": "^18.15.11",
-		"@typescript-eslint/eslint-plugin": "^5.57.0",
-		"@typescript-eslint/parser": "^5.57.0",
-		"eslint": "^8.37.0",
-		"ts-loader": "^9.4.2",
-		"typescript": "^5.0.3",
-		"webpack": "^5.77.0",
-		"webpack-cli": "^5.0.1",
-		"merge-options": "^3.0.4",
-		"rimraf": "^4.4.1"
-	}
+    "name": "sammi-sef",
+    "displayName": "SAMMI Extension",
+    "description": "A language server to create SAMMI extensions - Syntax Highlight, Snippets, Hover and Autocompletion for SAMMI helpers and JavaScript",
+    "icon": "icon/SAMMI-128x128.png",
+    "author": "SebasF1349",
+    "sponsor": {
+        "url": "https://ko-fi.com/sebasf1349"
+    },
+    "license": "GPL-3.0-only",
+    "version": "1.2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SebasF1349/SAMMI-sef-VSCode"
+    },
+    "publisher": "SebasF1349",
+    "categories": [
+        "Programming Languages",
+        "Snippets"
+    ],
+    "keywords": [
+        "SAMMI"
+    ],
+    "engines": {
+        "vscode": "^1.63.0"
+    },
+    "main": "./client/out/extension.js",
+    "activationEvents": [],
+    "contributes": {
+        "languages": [
+            {
+                "id": "sef",
+                "aliases": [
+                    "SAMMI Extension",
+                    "sef"
+                ],
+                "extensions": [
+                    "sef"
+                ],
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "light": "icon/SAMMI-32x32.png",
+                    "dark": "icon/SAMMI-32x32.png"
+                }
+            }
+        ],
+        "grammars": [
+            {
+                "language": "sef",
+                "scopeName": "source.sef",
+                "path": "./syntaxes/sef.tmLanguage.json",
+                "embeddedLanguages": {
+                    "source.js": "javascript",
+                    "text.html.basic": "HTML"
+                }
+            }
+        ],
+        "snippets": [
+            {
+                "language": "sef",
+                "path": "./snippets/snippets.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "sammi.installExtension",
+                "title": "SAMMI: Install Extension"
+            },
+            {
+                "command": "sammi.uninstallExtension",
+                "title": "SAMMI: Uninstall Extension"
+            },
+            {
+                "command": "sammi.extractExtension",
+                "title": "SAMMI: Extract Extension"
+            }
+        ],
+        "configuration": {
+            "id": "SAMMI",
+            "title": "SAMMI Extension",
+            "properties": {
+                "SAMMI.bridge.mainPath": {
+                    "markdownDescription": "The absolute folder path of the **Bridge** to install the extension (file name and extension included)",
+                    "type": "string",
+                    "scope": "machine",
+                    "order": 0
+                },
+                "SAMMI.bridge.extraPaths": {
+                    "markdownDescription": "Add more Bridge paths",
+                    "scope": "machine",
+                    "type": "array",
+                    "order": 1,
+                    "items": {
+                        "type": "object",
+                        "title": "Add new Bridge paths in each position",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Name of the Bridge that will be shown in the command"
+                            },
+                            "path": {
+                                "type": "string",
+                                "description": "Absolute path of the Bridge"
+                            }
+                        }
+                    },
+                    "default": [
+                        {
+                            "name": "",
+                            "description": ""
+                        }
+                    ]
+                },
+                "SAMMI.highlight.active": {
+                    "markdownDescription": "Highlight SAMMI sections",
+                    "type": "boolean",
+                    "scope": "machine",
+                    "order": 2,
+                    "default": "true"
+                },
+                "SAMMI.highlight.color": {
+                    "markdownDescription": "Color to Highlight SAMMI sections (only if `#SAMMI.highlight.active#` is set to true)",
+                    "type": "string",
+                    "scope": "machine",
+                    "order": 3
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run webpack",
+        "webpack": "npm run clean && webpack --mode production --config ./client/webpack.config.js && webpack --mode production --config ./server/webpack.config.js",
+        "webpack:dev": "npm run clean && webpack --mode none --config ./client/webpack.config.js && webpack --mode none --config ./server/webpack.config.js",
+        "compile": "tsc -b",
+        "compile:client": "tsc -b ./client/tsconfig.json",
+        "compile:server": "tsc -b ./server/tsconfig.json",
+        "watch": "tsc -b -w",
+        "lint": "npm run lint:client && npm run lint:server",
+        "lint:client": "eslint --config ./client/.eslintrc.json ./client/src/*.ts",
+        "lint:server": "eslint --config ./server/.eslintrc.json ./server/src/*.ts",
+        "clean": "rimraf client/out && rimraf server/out",
+        "postinstall": "cd client && npm install && cd ../server && npm install && cd .."
+    },
+    "devDependencies": {
+        "@types/node": "^18.15.11",
+        "@typescript-eslint/eslint-plugin": "^5.57.0",
+        "@typescript-eslint/parser": "^5.57.0",
+        "eslint": "^8.37.0",
+        "ts-loader": "^9.4.2",
+        "typescript": "^5.0.3",
+        "webpack": "^5.77.0",
+        "webpack-cli": "^5.0.1",
+        "merge-options": "^3.0.4",
+        "rimraf": "^4.4.1"
+    }
 }

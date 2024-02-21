@@ -1,16 +1,16 @@
 {
-	"name": "sammi-sef-client",
-	"description": "Extension client",
-	"author": "SebasF1349",
-	"license": "GPL-3.0-only",
-	"version": "1.0.1",
-	"engines": {
-		"vscode": "^1.63.0"
-	},
-	"dependencies": {
-		"vscode-languageclient": "^8.1.0"
-	},
-	"devDependencies": {
-		"@types/vscode": "^1.77.0"
-	}
+    "name": "sammi-sef-client",
+    "description": "Extension client",
+    "author": "SebasF1349",
+    "license": "GPL-3.0-only",
+    "version": "1.2.0",
+    "engines": {
+        "vscode": "^1.63.0"
+    },
+    "dependencies": {
+        "vscode-languageclient": "^8.1.0"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.77.0"
+    }
 }
